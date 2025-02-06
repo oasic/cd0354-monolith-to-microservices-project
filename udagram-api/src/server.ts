@@ -32,8 +32,13 @@ import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
     ],
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
     preflightContinue: true,
-    origin: '*',
+    //preflightContinue: false,  // jmf
+    //origin: '*',
+    origin: 'http://localhost:8100', // jmf
+    //credentials: true // jmf
   }));
+  // jmf
+  //app.options('*', cors());  // Handle preflight requests for all routes
 
   app.use('/api/v0/', IndexRouter);
 

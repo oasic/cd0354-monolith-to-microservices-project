@@ -29,12 +29,14 @@ export class ApiService {
 
   setAuthToken(token) {
     this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `jwt ${token}`);
+    //this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `jwt ${token}`); // jmf
     this.token = token;
   }
 
   get(endpoint): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
     const req = this.http.get(url, this.httpOptions).pipe(map(ApiService.extractData));
+    //const req = this.http.get(url, { headers: this.httpOptions.headers, withCredentials: true}).pipe(map(ApiService.extractData));
 
     return req
             .toPromise()
@@ -62,6 +64,7 @@ export class ApiService {
                                   {
                                     headers: headers,
                                     reportProgress: true, // track progress
+                                    //withCredentials: true, // jmf - CORS
                                   });
 
     return new Promise ( resolve => {
